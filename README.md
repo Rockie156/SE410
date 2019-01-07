@@ -1,2 +1,2 @@
-# SE410
-Repository for the SE 410 @ Drexel University
+# SE 410
+# Repository for SE 410 at Drexel University
