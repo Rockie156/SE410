@@ -25,4 +25,4 @@
  *
  * @since 2.0
  */
-package org.apache.commons.lang3.time;
+package org.apache.commons.text.time;
