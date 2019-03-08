@@ -18,10 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package storybook.model.hbn.entity;
 
 import java.awt.Dimension;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import org.w3c.dom.Element;
+
 import org.w3c.dom.Node;
+
 import storybook.i18n.I18N;
 import storybook.toolkit.html.HtmlUtil;
 import storybook.ui.dialog.ExceptionDlg;
@@ -60,10 +64,12 @@ public class Location extends AbstractEntity implements Comparable<Location> {
 	/**
 	 * @hibernate.id column="ID" generator-class="increment" unsaved-value="null"
 	 */
+	@Override
 	public Long getId() {
 		return this.id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -417,5 +423,69 @@ public class Location extends AbstractEntity implements Comparable<Location> {
 			return cmp2;
 		}
 		return cmp;
+	}
+
+	/**
+	 * Returns true if two locations are identical
+	 *
+	 * @param o
+	 * @return
+	 */
+	public boolean equals(Location o) {
+		// Check each getter
+		String[] attribute_functions = { "getName", "getAddress", "getCity", "getCountry", "getAltitude", "getSite" };
+		for (String attr : attribute_functions)
+			if (!isEqual(o, this, attr))
+				return false;
+
+		// if same attributes (return true) and same id:
+		// return false so that we can save
+		// this enables saving
+		if (this.getId() == o.getId()) {
+			return false;
+		}
+
+		// if same attributes (return true) and not same id:
+		// return true so that we don't create a conflict
+		return true;
+	}
+
+	/**
+	 * Checks if two Locations have the an equal attribute according to their
+	 * getters
+	 *
+	 * @param l1         - Location 1
+	 * @param l2         - Location 2
+	 * @param methodName - Name of the getter
+	 * @return
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 */
+	public boolean isEqual(Location l1, Location l2, String methodName) {
+		try {
+			Method method = l1.getClass().getMethod(methodName);
+
+			// If only one object has a null attribute, return false
+			if (method.invoke(l1) == null && method.invoke(l2) != null) {
+				return false;
+			}
+			if (method.invoke(l1) != null && method.invoke(l2) == null) {
+				return false;
+			}
+
+			// if both objects have a null attribute return true
+			if (method.invoke(l1) == null && method.invoke(l2) == null) {
+				return true;
+			}
+
+			// if both objects have non-null attributes, return the comparison between them
+			return method.invoke(l1).equals(method.invoke(l2));
+		} catch (Exception e) {
+			System.out.println("Failure in location comparison");
+			return false;
+		}
 	}
 }
