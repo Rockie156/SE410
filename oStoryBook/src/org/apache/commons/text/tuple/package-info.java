@@ -19,4 +19,4 @@
  *
  * @since 3.0
  */
-package org.apache.commons.text.tuple;
+package org.apache.commons.lang3.tuple;

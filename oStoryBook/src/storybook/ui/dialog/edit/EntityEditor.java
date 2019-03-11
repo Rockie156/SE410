@@ -17,9 +17,6 @@
  */
 package storybook.ui.dialog.edit;
 
-import storybook.ui.dialog.TitlePanel;
-import storybook.ui.dialog.edit.panel.CheckBoxPanel;
-import storybook.ui.dialog.edit.panel.CbPanelDecorator;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -67,16 +64,17 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.JTextComponent;
 
 import org.apache.commons.text.exception.ExceptionUtils;
-
-import org.miginfocom.swing.MigLayout;
-
+import org.hibernate.Session;
 import org.jopendocument.dom.OOUtils;
+import org.miginfocom.swing.MigLayout;
 
 import storybook.SbApp;
 import storybook.SbConstants;
 import storybook.SbConstants.ClientPropertyName;
 import storybook.SbConstants.ComponentName;
 import storybook.controller.BookController;
+import storybook.i18n.I18N;
+import storybook.model.BookModel;
 import storybook.model.EntityUtil;
 import storybook.model.handler.AbstractEntityHandler;
 import storybook.model.handler.AttributeEntityHandler;
@@ -97,6 +95,7 @@ import storybook.model.handler.StrandEntityHandler;
 import storybook.model.handler.TagEntityHandler;
 import storybook.model.handler.TagLinkEntityHandler;
 import storybook.model.handler.TimeEventEntityHandler;
+import storybook.model.hbn.dao.LocationDAOImpl;
 import storybook.model.hbn.entity.AbstractEntity;
 import storybook.model.hbn.entity.AbstractTag;
 import storybook.model.hbn.entity.Attribute;
@@ -121,12 +120,10 @@ import storybook.model.state.IdeaState;
 import storybook.model.state.SceneState;
 import storybook.model.state.TimeStepState;
 import storybook.toolkit.BookUtil;
-import storybook.i18n.I18N;
 import storybook.toolkit.completer.AbbrCompleter;
 import storybook.toolkit.net.NetUtil;
 import storybook.toolkit.odt.ODTUtils;
 import storybook.toolkit.swing.AutoCompleteComboBox;
-import storybook.ui.dialog.chooser.ColorChooserPanel;
 import storybook.toolkit.swing.ColorUtil;
 import storybook.toolkit.swing.FontUtil;
 import storybook.toolkit.swing.IconUtil;
@@ -140,7 +137,11 @@ import storybook.toolkit.swing.verifier.DocumentSizeFilter;
 import storybook.ui.MainFrame;
 import storybook.ui.RadioButtonGroup;
 import storybook.ui.combobox.IRefreshableComboModel;
+import storybook.ui.dialog.TitlePanel;
+import storybook.ui.dialog.chooser.ColorChooserPanel;
 import storybook.ui.dialog.chooser.IconChooserPanel;
+import storybook.ui.dialog.edit.panel.CbPanelDecorator;
+import storybook.ui.dialog.edit.panel.CheckBoxPanel;
 import storybook.ui.panel.AbstractPanel;
 import storybook.ui.panel.attributes.AttributesPanel;
 import storybook.ui.table.SbColumn;
@@ -660,7 +661,7 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 		SbApp.trace("EntityEditor.modelPropertyChange(evt)");
 		String propName = evt.getPropertyName();
 		if (propName.startsWith("Delete")) {
-			if (entity != null && entity.equals((AbstractEntity) evt.getOldValue())) {
+			if (entity != null && entity.equals(evt.getOldValue())) {
 				entityHandler = null;
 				initUi();
 			}
@@ -1000,7 +1001,7 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 				Object val = null;
 				Class<?>[] types = null;
 				if (type == Long.class) {
-					val = (Scene) objVal;
+					val = objVal;
 					types = new Class[]{Scene.class};
 				} else if (type == Integer.class) {
 					if (objVal != null) {
@@ -1023,7 +1024,7 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 							val = null;
 						}
 					} else {
-						val = (Person) objVal;
+						val = objVal;
 					}
 					types = new Class[]{Person.class};
 				} else if (type == Location.class) {
@@ -1032,7 +1033,7 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 							val = null;
 						}
 					} else {
-						val = (Location) objVal;
+						val = objVal;
 					}
 					types = new Class[]{Location.class};
 				} else if (type == Scene.class) {
@@ -1041,7 +1042,7 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 							val = null;
 						}
 					} else {
-						val = (Scene) objVal;
+						val = objVal;
 					}
 					types = new Class[]{Scene.class};
 				} else if (type == Chapter.class) {
@@ -1050,7 +1051,7 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 							val = null;
 						}
 					} else {
-						val = (Chapter) objVal;
+						val = objVal;
 					}
 					types = new Class[]{Chapter.class};
 				} else if (type == Part.class) {
@@ -1059,11 +1060,11 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 							val = null;
 						}
 					} else {
-						val = (Part) objVal;
+						val = objVal;
 					}
 					types = new Class[]{Part.class};
 				} else if (type == Gender.class) {
-					val = (Gender) objVal;
+					val = objVal;
 					types = new Class[]{Gender.class};
 				} else if (type == Category.class) {
 					if (objVal instanceof String) {
@@ -1071,57 +1072,57 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 							val = null;
 						}
 					} else {
-						val = (Category) objVal;
+						val = objVal;
 					}
 					types = new Class[]{Category.class};
 				} else if (type == Strand.class) {
-					val = (Strand) objVal;
+					val = objVal;
 					types = new Class[]{Strand.class};
 				} else if (type == Idea.class) {
-					val = (Idea) objVal;
+					val = objVal;
 					types
 						= new Class[]{Idea.class};
 				} else if (type == Tag.class) {
-					val = (Tag) objVal;
+					val = objVal;
 					types = new Class[]{Tag.class};
 				} else if (type == AbstractTag.class) {
-					val = (AbstractTag) objVal;
+					val = objVal;
 					types = new Class[]{AbstractTag.class};
 				} else if (type == Item.class) {
-					val = (Item) objVal;
+					val = objVal;
 					types = new Class[]{Item.class};
 				} else if (type == TagLink.class) {
-					val = (TagLink) objVal;
+					val = objVal;
 					types = new Class[]{TagLink.class};
 				} else if (type == ItemLink.class) {
-					val = (ItemLink) objVal;
+					val = objVal;
 					types = new Class[]{ItemLink.class};
 				} else if (type == TimeEvent.class) {
-					val = (TimeEvent) objVal;
+					val = objVal;
 					types = new Class[]{TimeEvent.class};
 				} else if (type == Date.class) {
-					val = (Date) objVal;
+					val = objVal;
 					types = new Class[]{Date.class};
 				} else if (type == Timestamp.class) {
-					val = (Timestamp) objVal;
+					val = objVal;
 					types = new Class[]{Timestamp.class};
 				} else if (type == Color.class) {
-					val = (Color) objVal;
+					val = objVal;
 					types = new Class[]{Color.class};
 				} else if (type == SceneState.class) {
-					val = (SceneState) objVal;
+					val = objVal;
 					types = new Class[]{SceneState.class};
 				} else if (type == TimeStepState.class) {
-					val = (TimeStepState) objVal;
+					val = objVal;
 					types = new Class[]{TimeStepState.class};
 				} else if (type == IdeaState.class) {
-					val = (IdeaState) objVal;
+					val = objVal;
 					types = new Class[]{IdeaState.class};
 				} else if (type == List.class) {
-					val = (List<?>) objVal;
+					val = objVal;
 					types = new Class[]{List.class};
 				} else if (type == Icon.class) {
-					val = (Icon) objVal;
+					val = objVal;
 					types = new Class[]{Icon.class};
 				}
 				if (col.getInputType() != InputType.ATTRIBUTES && col.getInputType() != InputType.NONE) {
@@ -1224,6 +1225,22 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 					((Scene) entity).setOdf(tfFile.getText());
 				}
 			}
+
+			if (entity instanceof Location) {
+				// Special checking for location
+				List<Location> locations = getLocations();
+
+				// Cast current entity as location
+				Location entity_as_location = (Location) entity;
+
+				// Check for duplicates and flag error state if true
+				for (Location l : locations) {
+					if (l.equals(entity_as_location)) {
+						errorState = ErrorState.ERROR;
+						break;
+					}
+				}
+			}
 			if (errorState != ErrorState.OK) {
 				if (errorState == ErrorState.ERROR) {
 					setMsgState(MsgState.ERRORS);
@@ -1238,6 +1255,13 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 		} catch (Exception e) {
 			SbApp.error("EntityEditor.updateEntityFromInputComponent()", e);
 		}
+	}
+
+	private List<Location> getLocations() {
+		BookModel model = mainFrame.getBookModel();
+		Session session = model.beginTransaction();
+		LocationDAOImpl locationDao = new LocationDAOImpl(session);
+		return locationDao.findAll();
 	}
 
 	private void addOrUpdateEntity() {
