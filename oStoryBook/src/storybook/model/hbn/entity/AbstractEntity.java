@@ -360,6 +360,10 @@ public abstract class AbstractEntity implements Serializable {
 	public String getClean(Gender gender) {
 		return(gender!=null?gender.getId().toString():"");
 	}
+	//adding species function
+	public String getClean(Species species) {
+		return(species!=null?species.getId().toString():"");
+	}
 	public String getClean(Chapter chapter) {
 		return(chapter!=null?chapter.getId().toString():"");
 	}

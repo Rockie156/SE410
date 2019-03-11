@@ -233,6 +233,11 @@ public class ActionHandler {
 	public void handleShowGenders() {
 		showAndFocus(ViewName.GENDERS);
 	}
+	
+	//add species here
+	public void handleShowSpecies() {
+		showAndFocus(ViewName.SPECIES);
+	}
 
 	public void handleShowPersons() {
 		showAndFocus(ViewName.PERSONS);

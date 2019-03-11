@@ -40,6 +40,7 @@ import storybook.toolkit.swing.ColorUtil;
 public class Person extends AbstractEntity implements Comparable<Person> {
 
 	private Gender gender;
+	private Species species; //added species member
 	private String firstname = "";
 	private String lastname = "";
 	private String abbreviation = "";
@@ -56,11 +57,12 @@ public class Person extends AbstractEntity implements Comparable<Person> {
 		super();
 	}
 
-	public Person(Gender gender, String firstname, String lastname,
+	public Person(Gender gender, Species species, String firstname, String lastname,
 			String abbreviation, Date birthday, Date dayofdeath,
 			String occupation, String description, Integer color, String notes,
 			Category category, List<Attribute> attributes) {
 		this.gender = gender;
+		this.species = species; //added species to constructor
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.abbreviation = abbreviation;
@@ -77,9 +79,19 @@ public class Person extends AbstractEntity implements Comparable<Person> {
 	public Gender getGender() {
 		return this.gender;
 	}
+	
+	//adding species get function
+	public Species getSpecies() {
+		return this.species;
+	}
 
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+	
+	//adding species set function
+	public void setSpecies(Species species) {
+		this.species = species;
 	}
 
 	public String getFirstname() {
@@ -276,6 +288,8 @@ public class Person extends AbstractEntity implements Comparable<Person> {
 		StringBuilder b=new StringBuilder();
 		b.append(quoteStart).append(getId().toString()).append(quoteEnd).append(separator);
 		b.append(quoteStart).append(getClean(getGender())).append(quoteEnd).append(separator);
+		//adding species line to append to csv
+		b.append(quoteStart).append(getClean(getSpecies())).append(quoteEnd).append(separator);
 		b.append(quoteStart).append(getFirstname()).append(quoteEnd).append(separator);
 		b.append(quoteStart).append(getLastname()).append(quoteEnd).append(separator);
 		b.append(quoteStart).append(getAbbreviation()).append(quoteEnd).append(separator);
@@ -310,6 +324,8 @@ public class Person extends AbstractEntity implements Comparable<Person> {
 		b.append(xmlTab(1)).append("<person \n");
 		b.append(xmlCommon());
 		b.append(xmlAttribute("gender", getClean(getGender().getName())));
+		//adding species to xml export
+		b.append(xmlAttribute("species", getClean(getSpecies().getName())));
 		b.append(xmlAttribute("firstname",getFirstname()));
 		b.append(xmlAttribute("lastname",getLastname()));
 		b.append(xmlAttribute("abbreviation",getAbbreviation()));
@@ -358,6 +374,8 @@ public class Person extends AbstractEntity implements Comparable<Person> {
 		ret = ret && equalsStringNullValue(firstname, test.getFirstname());
 		ret = ret && equalsStringNullValue(lastname, test.getLastname());
 		ret = ret && equalsObjectNullValue(gender, test.getGender());
+		//adding species here
+		ret = ret && equalsObjectNullValue(species, test.getSpecies());
 		ret = ret && equalsDateNullValue(birthday, test.getBirthday());
 		ret = ret && equalsDateNullValue(dayofdeath, test.getDayofdeath());
 		ret = ret && equalsIntegerNullValue(color, test.getColor());
@@ -375,6 +393,7 @@ public class Person extends AbstractEntity implements Comparable<Person> {
 		hash = hash * 31 + (firstname != null ? firstname.hashCode() : 0);
 		hash = hash * 31 + (lastname != null ? lastname.hashCode() : 0);
 		hash = hash * 31 + (gender != null ? gender.hashCode() : 0);
+		hash = hash * 31 + (species != null ? species.hashCode() : 0);
 		hash = hash * 31 + (birthday != null ? birthday.hashCode() : 0);
 		hash = hash * 31 + (dayofdeath != null ? dayofdeath.hashCode() : 0);
 		hash = hash * 31 + (color != null ? color.hashCode() : 0);

@@ -28,6 +28,7 @@ import storybook.model.hbn.entity.Attribute;
 import storybook.model.hbn.entity.Category;
 import storybook.model.hbn.entity.Chapter;
 import storybook.model.hbn.entity.Gender;
+import storybook.model.hbn.entity.Species; //adding species import
 import storybook.model.hbn.entity.Idea;
 import storybook.model.hbn.entity.Internal;
 import storybook.model.hbn.entity.Item;
@@ -445,6 +446,32 @@ public class BookController extends AbstractController {
 			return text.equals(prop);
 		}
 	};
+	
+	//species functionality
+	public enum SpeciesProps {
+
+		INIT("InitSpeciess"),
+		EDIT("EditSpecies"),
+		EXPORT("ExportSpecies"),
+		DELETE("DeleteSpecies"),
+		DELETE_MULTI("DeleteMultiSpecies"),
+		NEW("NewSpecies"),
+		UPDATE("UpdateSpecies");
+		final private String text;
+
+		private SpeciesProps(String text) {
+			this.text = text;
+		}
+
+		@Override
+		public String toString() {
+			return text;
+		}
+
+		public boolean check(String prop) {
+			return text.equals(prop);
+		}
+	};
 
 	public enum CategoryProps {
 
@@ -746,6 +773,8 @@ public class BookController extends AbstractController {
 				updateRelationship((Relationship) entity);
 			} else if (entity instanceof Gender) {
 				updateGender((Gender) entity);
+			} else if (entity instanceof Species) {
+				updateSpecies((Species) entity); //adding species functionality
 			} else if (entity instanceof Category) {
 				updateCategory((Category) entity);
 			} else if (entity instanceof Strand) {
@@ -791,6 +820,8 @@ public class BookController extends AbstractController {
 				deleteRelationship((Relationship) entity);
 			} else if (entity instanceof Gender) {
 				deleteGender((Gender) entity);
+			} else if (entity instanceof Species) {
+				deleteSpecies((Species) entity); //species functionality
 			} else if (entity instanceof Category) {
 				deleteCategory((Category) entity);
 			} else if (entity instanceof Attribute) {
