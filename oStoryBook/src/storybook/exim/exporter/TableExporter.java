@@ -117,6 +117,9 @@ public class TableExporter extends AbstractExporter {
 			case "genders":
 				writeGender();
 				break;
+			case "species":
+				writeSpecies(); //added species functionality
+				break;
 			case "ideas":
 				writeIdea();
 				break;
@@ -250,6 +253,32 @@ public class TableExporter extends AbstractExporter {
 		GenderDAOImpl dao = new GenderDAOImpl(session);
 		List<Gender> entities = dao.findAll();
 		for (Gender e : entities) {
+			switch (param.format) {
+				case "xml": writeText(e.toXml());  break;
+				case "hml": writeText(e.toHtml()); break;
+				case "csv": writeText(e.toCsv(param.csvQuote, param.csvQuote, param.csvComma)); break;
+				case "txt": writeText(e.toText()); break;
+			}
+		}
+		model.commit();
+	}
+	
+	//similar to above
+	private void writeSpecies() {
+		List<ColumnHeader> headers = new ArrayList<>();
+		headers.add(new ColumnHeader(I18N.getMsg("id"), 5));
+		headers.add(new ColumnHeader(I18N.getMsg("name"), 32));
+		headers.add(new ColumnHeader(I18N.getMsg("chart.gantt.childhood"), 3));
+		headers.add(new ColumnHeader(I18N.getMsg("chart.gantt.adolescence"), 3));
+		headers.add(new ColumnHeader(I18N.getMsg("chart.gantt.adulthood"), 3));
+		headers.add(new ColumnHeader(I18N.getMsg("chart.gantt.retirement"), 3));
+		headers.add(new ColumnHeader(I18N.getMsg("icone"), 32));
+		writeHeaderColumn(headers);
+		BookModel model = mainFrame.getBookModel();
+		Session session = model.beginTransaction();
+		SpeciesDAOImpl dao = new SpeciesDAOImpl(session); 
+		List<Species> entities = dao.findAll();
+		for (Species e : entities) {
 			switch (param.format) {
 				case "xml": writeText(e.toXml());  break;
 				case "hml": writeText(e.toHtml()); break;
@@ -433,6 +462,7 @@ public class TableExporter extends AbstractExporter {
 		List<ColumnHeader> headers = new ArrayList<>();
 		headers.add(new ColumnHeader(I18N.getMsg("id"), 5));
 		headers.add(new ColumnHeader(I18N.getMsg("gender"), 16));
+		headers.add(new ColumnHeader(I18N.getMsg("species"), 16));
 		headers.add(new ColumnHeader(I18N.getMsg("person.firstname"), 16));
 		headers.add(new ColumnHeader(I18N.getMsg("person.lastname"), 16));
 		headers.add(new ColumnHeader(I18N.getMsg("person.abbr"), 5));
@@ -645,6 +675,7 @@ public class TableExporter extends AbstractExporter {
 		writeAttribute();
 		writeCategory();
 		writeGender();
+		writeSpecies();
 		writeItem();
 		writeItemLink();
 		writeLocation();

@@ -81,6 +81,7 @@ import storybook.model.handler.AttributeEntityHandler;
 import storybook.model.handler.CategoryEntityHandler;
 import storybook.model.handler.ChapterEntityHandler;
 import storybook.model.handler.GenderEntityHandler;
+import storybook.model.handler.SpeciesEntityHandler;
 import storybook.model.handler.IdeaEntityHandler;
 import storybook.model.handler.InternalEntityHandler;
 import storybook.model.handler.ItemEntityHandler;
@@ -102,6 +103,7 @@ import storybook.model.hbn.entity.Attribute;
 import storybook.model.hbn.entity.Category;
 import storybook.model.hbn.entity.Chapter;
 import storybook.model.hbn.entity.Gender;
+import storybook.model.hbn.entity.Species;
 import storybook.model.hbn.entity.Idea;
 import storybook.model.hbn.entity.Internal;
 import storybook.model.hbn.entity.Item;
@@ -214,6 +216,8 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 			entityHandler = new PersonEntityHandler(mainFrame);
 		} else if (entity instanceof Gender) {
 			entityHandler = new GenderEntityHandler(mainFrame);
+		} else if (entity instanceof Species) {
+			entityHandler = new SpeciesEntityHandler(mainFrame);
 		} else if (entity instanceof Category) {
 			entityHandler = new CategoryEntityHandler(mainFrame);
 		} else if (entity instanceof Attribute) {
@@ -683,6 +687,8 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 			entityHandler = new PersonEntityHandler(mainFrame);
 		} else if (BookController.GenderProps.EDIT.check(propName)) {
 			entityHandler = new GenderEntityHandler(mainFrame);
+		} else if (BookController.SpeciesProps.EDIT.check(propName)) {
+			entityHandler = new SpeciesEntityHandler(mainFrame);
 		} else if (BookController.CategoryProps.EDIT.check(propName)) {
 			entityHandler = new CategoryEntityHandler(mainFrame);
 		} else if (BookController.StrandProps.EDIT.check(propName)) {
@@ -1066,6 +1072,9 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 				} else if (type == Gender.class) {
 					val = objVal;
 					types = new Class[]{Gender.class};
+				} else if (type == Species.class) {
+					val = objVal;
+					types = new Class[]{Species.class};
 				} else if (type == Category.class) {
 					if (objVal instanceof String) {
 						if (((String) objVal).length() == 0) {

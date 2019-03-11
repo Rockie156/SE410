@@ -32,6 +32,7 @@ import storybook.model.hbn.dao.CategoryDAOImpl;
 import storybook.model.hbn.dao.ChapterDAOImpl;
 import storybook.model.hbn.dao.DAOutil;
 import storybook.model.hbn.dao.GenderDAOImpl;
+import storybook.model.hbn.dao.SpeciesDAOImpl;
 import storybook.model.hbn.dao.IdeaDAOImpl;
 import storybook.model.hbn.dao.ItemDAOImpl;
 import storybook.model.hbn.dao.ItemLinkDAOImpl;
@@ -52,6 +53,7 @@ import storybook.model.hbn.entity.Attribute;
 import storybook.model.hbn.entity.Category;
 import storybook.model.hbn.entity.Chapter;
 import storybook.model.hbn.entity.Gender;
+import storybook.model.hbn.entity.Species;
 import storybook.model.hbn.entity.Idea;
 import storybook.model.hbn.entity.Item;
 import storybook.model.hbn.entity.ItemLink;
@@ -115,6 +117,11 @@ class ImportUtil {
 					//import only other than male female
 					if (gender.getId()>2) entities.add(new ImportEntity(gender,n));
 					break;
+				case "species":
+					Species species=Species.fromXml(n);
+					//import only other than human
+					if (species.getId()>1) entities.add(new ImportEntity(species,n));
+					break;
 				case "category":
 					Category category=Category.fromXml(n);
 					//import only other than central and secondary characters
@@ -162,6 +169,8 @@ class ImportUtil {
 				dao = new CategoryDAOImpl(session); break;
 			case "gender":
 				dao = new GenderDAOImpl(session); break;
+			case "species":
+				dao = new SpeciesDAOImpl(session); break;
 			case "location":
 				dao = new LocationDAOImpl(session); break;
 			case "item":
@@ -210,6 +219,8 @@ class ImportUtil {
 				return(updateCategory(mainFrame,newEntity,(Category)oldEntity));
 			case "gender":
 				return(updateGender(mainFrame,newEntity,(Gender)oldEntity));
+			case "species":
+				return(updateSpecies(mainFrame,newEntity,(Species)oldEntity));
 			case "person":
 				return(updatePerson(mainFrame,newEntity,(Person)oldEntity));
 			case "location":
@@ -341,11 +352,18 @@ class ImportUtil {
 		return((AbstractEntity)entity);
 	}
 	
+	private static AbstractEntity updateSpecies(MainFrame mainFrame,ImportEntity newEntity, Species oldEntity) {
+		Species entity=(Species)newEntity.entity;
+		// as is, no link to update
+		return((AbstractEntity)entity);
+	}
+	
 	private static AbstractEntity updatePerson(MainFrame mainFrame,ImportEntity newEntity, Person oldEntity) {
 		Person entity=(Person)newEntity.entity;
 		// gender, category, attributes not modified
 		if (oldEntity!=null) {
 			entity.setGender(oldEntity.getGender());
+			entity.setSpecies(oldEntity.getSpecies()); 
 			entity.setCategory(oldEntity.getCategory());
 			entity.setAttributes(oldEntity.getAttributes());
 		}
@@ -353,6 +371,8 @@ class ImportUtil {
 			String str;
 			str=AbstractEntity.getXmlText(newEntity.node,"gender");
 			if (!str.isEmpty()) entity.setGender(DAOutil.getGenderDAO(mainFrame).findTitle(str));
+			str=AbstractEntity.getXmlText(newEntity.node,"species");
+			if (!str.isEmpty()) entity.setSpecies(DAOutil.getSpeciesDAO(mainFrame).findTitle(str));
 			str=AbstractEntity.getXmlText(newEntity.node,"category");
 			if (!str.isEmpty()) entity.setCategory(DAOutil.getCategoryDAO(mainFrame).findTitle(str));
 			List<String> list;

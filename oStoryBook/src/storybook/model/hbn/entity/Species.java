@@ -103,19 +103,18 @@ public class Species extends AbstractEntity {
 	public void setRetirement(Integer retirement) {
 		this.retirement = retirement;
 	}
-
+	
+	/*
 	public boolean isMale() {
 		return id == 1;
 	}
 
 	public boolean isFemale() {
 		return id == 2;
-	}
+	}*/
 	//////////////////////////////
-	public boolean isSpecies(String speciesName) {
-		if (speciesName.equals(this.name)) {
-			return true;
-		} else return false;
+	public boolean isHuman() {
+		return id == 1;
 	}
 
 	@Override

@@ -116,6 +116,8 @@ public class ImportDlg  extends AbstractDialog {
 		setLocationRelativeTo(mainFrame);
 		tasks=new ArrayList<>();
 		tasks.add(new ImportDlg.ImportTask("gender"));
+		tasks.add(new ImportDlg.ImportTask("species")); //adding new functionality
+		//I didn't comment any of these lines out; they were like that. -Andrew
 //		tasks.add(new ImportDlg.ImportTask("category"));
 		tasks.add(new ImportDlg.ImportTask("strand"));
 		tasks.add(new ImportDlg.ImportTask("part"));

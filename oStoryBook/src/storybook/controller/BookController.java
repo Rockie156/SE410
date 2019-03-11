@@ -450,7 +450,7 @@ public class BookController extends AbstractController {
 	//species functionality
 	public enum SpeciesProps {
 
-		INIT("InitSpeciess"),
+		INIT("InitSpecies"),
 		EDIT("EditSpecies"),
 		EXPORT("ExportSpecies"),
 		DELETE("DeleteSpecies"),
@@ -867,6 +867,8 @@ public class BookController extends AbstractController {
 				newRelationship((Relationship) entity);
 			} else if (entity instanceof Gender) {
 				newGender((Gender) entity);
+			} else if (entity instanceof Species) { //species functionality
+				newSpecies((Species) entity);
 			} else if (entity instanceof Category) {
 				newCategory((Category) entity);
 			} else if (entity instanceof Strand) {
@@ -912,6 +914,8 @@ public class BookController extends AbstractController {
 				setRelationshipToEdit((Relationship) entity);
 			} else if (entity instanceof Gender) {
 				setGenderToEdit((Gender) entity);
+			} else if (entity instanceof Species) {
+				setSpeciesToEdit((Species) entity); //species functionality
 			} else if (entity instanceof Category) {
 				setCategoryToEdit((Category) entity);
 			} else if (entity instanceof Strand) {
@@ -1185,6 +1189,29 @@ public class BookController extends AbstractController {
 	public void setGenderToEdit(Gender genderToEdit) {
 		setModelProperty(GenderProps.EDIT.toString(), genderToEdit);
 	}
+	
+	
+	// species - newly added
+	public void updateSpecies(Species species) {
+		setModelProperty(SpeciesProps.UPDATE.toString(), species);
+	}
+
+	public void newSpecies(Species newSpecies) {
+		setModelProperty(SpeciesProps.NEW.toString(), newSpecies);
+	}
+
+	public void deleteSpecies(Species speciesToDeleted) {
+		setModelProperty(SpeciesProps.DELETE.toString(), speciesToDeleted);
+	}
+
+	public void deleteMultiSpecies(ArrayList<Long> ids) {
+		setModelProperty(SpeciesProps.DELETE_MULTI.toString(), ids);
+	}
+
+	public void setSpeciesToEdit(Species speciesToEdit) {
+		setModelProperty(SpeciesProps.EDIT.toString(), speciesToEdit);
+	}
+	
 
 	// attributes
 	public void updateAttribute(Attribute entity) {

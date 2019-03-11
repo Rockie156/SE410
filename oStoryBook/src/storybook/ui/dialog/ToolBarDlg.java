@@ -54,7 +54,7 @@ public class ToolBarDlg extends AbstractDialog {
 			, {"new", "0", "16x16/chapter", "chapter.new"}
 			, {"new", "0", "16x16/scene", "scene.new"}
 			, {"new", "1", "16x16/person", "person.new"}
-			, {"new", "1", "16x16/gender", "gender.new"}
+			, {"new", "1", "16x16/gender", "gender.new"} //not sure if I need to add a species item here yet -Andrew
 			, {"new", "1", "16x16/group", "relationship.new"}
 			, {"new", "2", "16x16/location", "location.new"}
 			, {"new", "3", "16x16/item", "item.new"}
@@ -68,7 +68,7 @@ public class ToolBarDlg extends AbstractDialog {
 			, {"table", "0", "16x32/manage_chapters", "chapter"}
 			, {"table", "0", "16x32/manage_scenes", "scene"}
 			, {"table", "1", "16x32/manage_persons", "person"}
-			, {"table", "1", "16x32/manage_genders", "gender"}
+			, {"table", "1", "16x32/manage_genders", "gender"} //not sure if I need to add a species item here yet -Andrew
 			, {"table", "1", "16x32/manage_groups", "relationship"}
 			, {"table", "2", "16x32/manage_locations", "location"}
 			, {"table", "3", "16x32/manage_items", "item"}

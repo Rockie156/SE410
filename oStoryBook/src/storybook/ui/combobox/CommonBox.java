@@ -26,6 +26,7 @@ import storybook.model.hbn.dao.AttributeDAOImpl;
 import storybook.model.hbn.dao.CategoryDAOImpl;
 import storybook.model.hbn.dao.ChapterDAOImpl;
 import storybook.model.hbn.dao.GenderDAOImpl;
+import storybook.model.hbn.dao.SpeciesDAOImpl;
 import storybook.model.hbn.dao.IdeaDAOImpl;
 import storybook.model.hbn.dao.ItemDAOImpl;
 import storybook.model.hbn.dao.ItemLinkDAOImpl;
@@ -39,6 +40,7 @@ import storybook.model.hbn.entity.Attribute;
 import storybook.model.hbn.entity.Category;
 import storybook.model.hbn.entity.Chapter;
 import storybook.model.hbn.entity.Gender;
+import storybook.model.hbn.entity.Species;
 import storybook.model.hbn.entity.Idea;
 import storybook.model.hbn.entity.Item;
 import storybook.model.hbn.entity.ItemLink;
@@ -166,6 +168,19 @@ public class CommonBox {
 	}
 
 	@SuppressWarnings("unchecked")
+	public static void fillCbSpecies(MainFrame mainFrame, JComboBox cb) {
+		BookModel model = mainFrame.getBookModel();
+		Session session = model.beginTransaction();
+		SpeciesDAOImpl dao = new SpeciesDAOImpl(session);
+		List<Species> species = dao.findAll();
+		cb.removeAllItems();
+		for (Species s : species) {
+			cb.addItem(s);
+		}
+		model.commit();
+	}
+
+	@SuppressWarnings("unchecked")
 	public static void loadCbGenders(MainFrame mainFrame, JComboBox cb, Person person) {
 		BookModel model = mainFrame.getBookModel();
 		Session session = model.beginTransaction();
@@ -176,6 +191,25 @@ public class CommonBox {
 		for (Gender gender : genders) {
 			cb.addItem(gender.getName());
 			if ((person!=null) &&((!person.getFullName().equals(" ")) && (person.getGender().equals(gender)))) {
+				ix = i;
+			}
+			i++;
+		}
+		cb.setSelectedIndex(ix);
+		model.commit();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static void loadCbSpecies(MainFrame mainFrame, JComboBox cb, Person person) {
+		BookModel model = mainFrame.getBookModel();
+		Session session = model.beginTransaction();
+		SpeciesDAOImpl dao = new SpeciesDAOImpl(session);
+		List<Species> species = dao.findAll();
+		cb.removeAllItems();
+		int ix = -1, i = 0;
+		for (Species s : species) {
+			cb.addItem(s.getName());
+			if ((person!=null) &&((!person.getFullName().equals(" ")) && (person.getSpecies().equals(s)))) {
 				ix = i;
 			}
 			i++;
@@ -199,6 +233,23 @@ public class CommonBox {
 		}
 		model.commit();
 		return (rgender);
+	}
+	
+	public static Species findSpecies(MainFrame mainFrame, String str) {
+		Species rspecies = null;
+		BookModel model = mainFrame.getBookModel();
+		Session session = model.beginTransaction();
+		SpeciesDAOImpl dao = new SpeciesDAOImpl(session);
+		List<Species> species = dao.findAll();
+		int ix = -1, i = 0;
+		for (Species s : species) {
+			if (str.equals(s.getName())) {
+				rspecies = s;
+				break;
+			}
+		}
+		model.commit();
+		return (rspecies);
 	}
 
 	@SuppressWarnings("unchecked")

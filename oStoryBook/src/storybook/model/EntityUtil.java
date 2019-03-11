@@ -69,6 +69,7 @@ import storybook.model.handler.AttributeEntityHandler;
 import storybook.model.handler.CategoryEntityHandler;
 import storybook.model.handler.ChapterEntityHandler;
 import storybook.model.handler.GenderEntityHandler;
+import storybook.model.handler.SpeciesEntityHandler;
 import storybook.model.handler.IdeaEntityHandler;
 import storybook.model.handler.InternalEntityHandler;
 import storybook.model.handler.ItemEntityHandler;
@@ -87,6 +88,7 @@ import storybook.model.hbn.dao.AttributeDAOImpl;
 import storybook.model.hbn.dao.CategoryDAOImpl;
 import storybook.model.hbn.dao.ChapterDAOImpl;
 import storybook.model.hbn.dao.GenderDAOImpl;
+import storybook.model.hbn.dao.SpeciesDAOImpl;
 import storybook.model.hbn.dao.IdeaDAOImpl;
 import storybook.model.hbn.dao.ItemDAOImpl;
 import storybook.model.hbn.dao.ItemLinkDAOImpl;
@@ -105,6 +107,7 @@ import storybook.model.hbn.entity.Attribute;
 import storybook.model.hbn.entity.Category;
 import storybook.model.hbn.entity.Chapter;
 import storybook.model.hbn.entity.Gender;
+import storybook.model.hbn.entity.Species;
 import storybook.model.hbn.entity.Idea;
 import storybook.model.hbn.entity.Internal;
 import storybook.model.hbn.entity.Item;
@@ -314,6 +317,8 @@ public class EntityUtil {
 		} else if (entity instanceof Gender) {
 			ret.add(1L);
 			ret.add(2L);
+		} else if (entity instanceof Species) {
+			ret.add(1L);
 		} else if (entity instanceof Part) {
 			ret.add(1L);
 		} else if (entity instanceof Strand) {
@@ -530,6 +535,11 @@ public class EntityUtil {
 			e.setName(copyStr + e.getName());
 			return;
 		}
+		if (entity instanceof Species) {
+			Species e = (Species) entity;
+			e.setName(copyStr + e.getName());
+			return;
+		}
 		if (entity instanceof Location) {
 			Location e = (Location) entity;
 			e.setName(copyStr + e.getName());
@@ -578,7 +588,14 @@ public class EntityUtil {
 			Person upd = (Person) updEntity;
 			if (!Objects.equals(old.getCategory().getId(), upd.getCategory().getId())) {
 				return true;
+			} 
+/////////////////////////not sure how to add species functionality here
+			//trying an else if statement?????
+			//because the last return is essentially an else clause
+			else if (!Objects.equals(old.getSpecies().getId(), upd.getSpecies().getId())) {
+				return true;
 			}
+			//else...
 			return !Objects.equals(old.getGender().getId(), upd.getGender().getId());
 		}
 		if (oldEntity instanceof Relationship) {
@@ -779,6 +796,9 @@ public class EntityUtil {
 		if (entity instanceof Gender) {
 			return new GenderEntityHandler(mainFrame);
 		}
+		if (entity instanceof Species) {
+			return new SpeciesEntityHandler(mainFrame);
+		}
 		if (entity instanceof Category) {
 			return new CategoryEntityHandler(mainFrame);
 		}
@@ -827,6 +847,9 @@ public class EntityUtil {
 		}
 		if (entity instanceof Gender) {
 			return Gender.class;
+		}
+		if (entity instanceof Species) {
+			return Species.class;
 		}
 		if (entity instanceof Attribute) {
 			return Attribute.class;
@@ -1114,6 +1137,13 @@ public class EntityUtil {
 		buf.append(" ");
 		buf.append(person.getGender());
 		buf.append("<br>");
+		
+		//adding new html
+		buf.append(I18N.getColonMsg("manage.persons.species"));
+		buf.append(" ");
+		buf.append(person.getSpecies());
+		buf.append("<br>");
+		
 		buf.append(I18N.getColonMsg("manage.persons.category"));
 		buf.append(" ");
 		buf.append(person.getCategory());
@@ -1203,6 +1233,24 @@ public class EntityUtil {
 			if (!persons.isEmpty()) {
 				buf.append("<p style='padding-top:10px'>");
 				buf.append(HtmlUtil.getWarning(I18N.getMsg("gender.delete.warning")));
+				buf.append("</p><br>");
+				buf.append(I18N.getColonMsg("persons"));
+				buf.append("<br><ul>");
+				for (Person person : persons) {
+					buf.append("<li>");
+					buf.append(person);
+					buf.append("</li>\n");
+				}
+				buf.append("</ul>");
+				warnings = true;
+			}
+		} else if (entity instanceof Species) {
+			Species species = (Species) entity;
+			SpeciesDAOImpl dao = new SpeciesDAOImpl(session);
+			List<Person> persons = dao.findPersons(species);
+			if (!persons.isEmpty()) {
+				buf.append("<p style='padding-top:10px'>");
+				buf.append(HtmlUtil.getWarning(I18N.getMsg("species.delete.warning")));
 				buf.append("</p><br>");
 				buf.append(I18N.getColonMsg("persons"));
 				buf.append("<br><ul>");
@@ -1446,6 +1494,9 @@ public class EntityUtil {
 		}
 		if (obj instanceof Gender || method.getReturnType() == Gender.class) {
 			return new GenderEntityHandler(mainFrame);
+		}
+		if (obj instanceof Species || method.getReturnType() == Species.class) {
+			return new SpeciesEntityHandler(mainFrame);
 		}
 		if (obj instanceof Part || method.getReturnType() == Part.class) {
 			return new PartEntityHandler(mainFrame);
@@ -1814,6 +1865,9 @@ public class EntityUtil {
 		if (entity instanceof Gender) {
 			return I18N.getIcon("icon.small.gender");
 		}
+		if (entity instanceof Species) {
+			return I18N.getIcon("icon.small.species");//not sure if I should leave this as species for now
+		}
 		if (entity instanceof Category) {
 			return I18N.getIcon("icon.small.category");
 		}
@@ -1911,6 +1965,12 @@ public class EntityUtil {
 			}
 			return I18N.getMsg("person.gender");
 		}
+		if (entity instanceof Species) {
+			if (isTransient) {
+				return I18N.getMsg("manage.persons.species.new");
+			}
+			return I18N.getMsg("person.species");
+		}
 		if (entity instanceof Category) {
 			if (isTransient) {
 				return I18N.getMsg("persons.category");
@@ -1989,6 +2049,9 @@ public class EntityUtil {
 		}
 		if (entity instanceof Gender) {
 			return ((Gender)entity).getName();
+		}
+		if (entity instanceof Species) {
+			return ((Species)entity).getName();
 		}
 		if (entity instanceof Category) {
 			return ((Category)entity).getName();

@@ -27,6 +27,7 @@ import org.hibernate.Session;
 import storybook.model.hbn.SbSessionFactory;
 import storybook.model.hbn.dao.ChapterDAOImpl;
 import storybook.model.hbn.dao.GenderDAOImpl;
+import storybook.model.hbn.dao.SpeciesDAOImpl;
 import storybook.model.hbn.dao.IdeaDAOImpl;
 import storybook.model.hbn.dao.InternalDAOImpl;
 import storybook.model.hbn.dao.ItemDAOImpl;
@@ -39,6 +40,7 @@ import storybook.model.hbn.dao.TagDAOImpl;
 import storybook.model.hbn.dao.TagLinkDAOImpl;
 import storybook.model.hbn.entity.Chapter;
 import storybook.model.hbn.entity.Gender;
+import storybook.model.hbn.entity.Species;
 import storybook.model.hbn.entity.Idea;
 import storybook.model.hbn.entity.Location;
 import storybook.model.hbn.entity.Person;
@@ -79,6 +81,7 @@ public class Test01 {
 		sessionFactory.query(new ItemDAOImpl(session));
 		sessionFactory.query(new TagLinkDAOImpl(session));
 		sessionFactory.query(new GenderDAOImpl(session));
+		sessionFactory.query(new SpeciesDAOImpl(session));
 		sessionFactory.query(new PersonDAOImpl(session));
 		sessionFactory.query(new ChapterDAOImpl(session));
 		sessionFactory.query(new PartDAOImpl(session));
@@ -158,8 +161,10 @@ public class Test01 {
 		session.beginTransaction();
 
 		Gender gender = (Gender) session.get(Gender.class, 1L);
+		Species species = (Species) session.get(Species.class, 1L);
 		Person person = new Person();
 		person.setGender(gender);
+		person.setSpecies(species);
 		person.setAbbreviation("NP");
 		person.setFirstname("new person");
 		Calendar cal = Calendar.getInstance();

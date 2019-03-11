@@ -325,6 +325,10 @@ public class ModelMigration {
 		// gender
 		sql = "alter table gender alter column name varchar(256)";
 		executeSQLStatement(sql, stmt);
+		
+		// species
+		sql = "alter table species alter column name varchar(256)";
+		executeSQLStatement(sql, stmt);
 
 		// idea
 		sql = "alter table ideas alter column category varchar(256)";

@@ -57,7 +57,7 @@ public class PersonCbPanelDecorator extends CbPanelDecorator {
 	public void decorateEntity(JCheckBox cb, AbstractEntity entity) {
 		Person p = (Person) entity;
 		JLabel lbIcon = new JLabel(p.getImageIcon());
-		lbIcon.setToolTipText(p.getGender().getName());
+		lbIcon.setToolTipText(p.getGender().getName()); //not sure if I need to add species functionality here. -Andrew
 		panel.add(lbIcon, "split 2");
 		panel.add(cb);
 	}

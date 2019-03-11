@@ -19,19 +19,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package storybook.ui.combobox;
 
 import java.awt.Component;
+import java.awt.Dimension;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
 import javax.swing.JList;
 
-import storybook.model.hbn.entity.Person;
+import storybook.model.hbn.entity.Species;
 
 /**
  * @author martin
  *
  */
 @SuppressWarnings("serial")
-public class PersonListCellRenderer extends DefaultListCellRenderer {
+public class SpeciesListCellRenderer extends DefaultListCellRenderer {
 
 	@Override
 	public Component getListCellRendererComponent(JList list, Object value,
@@ -39,19 +40,8 @@ public class PersonListCellRenderer extends DefaultListCellRenderer {
 		try {
 			JLabel label = (JLabel) super.getListCellRendererComponent(list,
 					value, index, isSelected, cellHasFocus);
-			if (!(value instanceof Person)) {
-				String str = value.toString();
-				if (str.isEmpty()) {
-					label.setText(" ");
-					return label;
-				}
-				label.setText(value.toString());
-				return label;
-			}
-			Person person = (Person) value;
-			label.setIcon(person.getGender().getImageIcon()); 
-			//not sure if I need to add a species icon
-			//UI probably isn't designed for two icons here, so I'll skip it for now -Andrew
+			Species species = (Species) value;
+			label.setIcon(species.getIcon(16,16));
 			return label;
 		} catch (Exception e) {
 			return new JLabel("");
