@@ -46,7 +46,7 @@ class EntityTreeCellRenderer extends DefaultTreeCellRenderer {
 		DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
 		Object object = node.getUserObject();
 		if (leaf) {
-			if (object instanceof Person) {
+			if (object instanceof Person) { //not sure if species functionality can be added here
 				setLeafIcon(((Person) object).getGender().getImageIcon());
 			} else if (object instanceof Scene) {
 				setLeafIcon(((Scene) object).getSceneState().getIcon());
