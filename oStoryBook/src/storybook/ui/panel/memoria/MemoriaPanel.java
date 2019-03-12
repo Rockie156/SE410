@@ -764,6 +764,7 @@ public class MemoriaPanel extends AbstractPanel implements ActionListener, IRefr
 		return (period == null) || (date == null) || (period.isInside(date));
 	}
 	
+	//not sure if species functionality can be added here
 	public Icon getIconPerson(Person person, boolean medium) {
 		Icon icon;
 		if (medium) {
