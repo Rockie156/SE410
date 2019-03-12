@@ -23,16 +23,12 @@ import java.util.ArrayList;
 
 import org.hibernate.Session;
 import storybook.SbApp;
-import storybook.SbConstants.ViewName;
 import storybook.controller.BookController;
 import storybook.exim.exporter.TableExporter;
 import storybook.model.BookModel;
-import storybook.model.hbn.dao.PersonDAOImpl;
+import storybook.model.hbn.dao.SpeciesDAOImpl;
 import storybook.model.hbn.entity.AbstractEntity;
-import storybook.model.hbn.entity.Category;
-import storybook.model.hbn.entity.Gender;
 import storybook.model.hbn.entity.Species;
-import storybook.model.hbn.entity.Person;
 import storybook.ui.MainFrame;
 import storybook.ui.SbView;
 
@@ -41,71 +37,34 @@ import storybook.ui.SbView;
  *
  */
 @SuppressWarnings("serial")
-public class PersonTable extends AbstractTable {
+public class SpeciesTable extends AbstractTable {
 
-	public PersonTable(MainFrame mainFrame) {
+	public SpeciesTable(MainFrame mainFrame) {
 		super(mainFrame);
 	}
 
 	@Override
 	public void init() {
-		columns = SbColumnFactory.getInstance().getPersonColumns();
+		columns = SbColumnFactory.getInstance().getSpeciesColumns();
 	}
 
 	@Override
 	protected void modelPropertyChangeLocal(PropertyChangeEvent evt) {
 		try {
 			String propName = evt.getPropertyName();
-			if (BookController.PersonProps.INIT.check(propName)) {
+			if (BookController.SpeciesProps.INIT.check(propName)) {
 				initTableModel(evt);
-			} else if (BookController.PersonProps.UPDATE.check(propName)) {
-				updateEntity(evt);
-			} else if (BookController.PersonProps.NEW.check(propName)) {
-				newEntity(evt);
-			} else if (BookController.PersonProps.DELETE.check(propName)) {
-				deleteEntity(evt);
-			} else if (BookController.GenderProps.UPDATE.check(propName)) {
-				updateGenders(evt);
 			} else if (BookController.SpeciesProps.UPDATE.check(propName)) {
-				updateSpecies(evt);
-			} else if (BookController.CategoryProps.UPDATE.check(propName)) {
-				updateCategories(evt);
+				updateEntity(evt);
+			} else if (BookController.SpeciesProps.NEW.check(propName)) {
+				newEntity(evt);
+			} else if (BookController.SpeciesProps.DELETE.check(propName)) {
+				deleteEntity(evt);
 			} else if (BookController.CommonProps.EXPORT.check(propName) 
-				&& ((SbView)evt.getNewValue()).getName().equals("Persons")) {
+				&& ((SbView)evt.getNewValue()).getName().equals("Species")) {
 				TableExporter.exportTable(mainFrame,(SbView)evt.getNewValue());
 			}
-
 		} catch (Exception e) {
-		}
-	}
-
-	private void updateCategories(PropertyChangeEvent evt) {
-		Category oldCategory = (Category) evt.getOldValue();
-		Category newCategory = (Category) evt.getNewValue();
-		for (int row = 0; row < tableModel.getRowCount(); ++row) {
-			if (oldCategory.equals(newCategory)) {
-				tableModel.setValueAt(newCategory, row, 1);
-			}
-		}
-	}
-
-	private void updateGenders(PropertyChangeEvent evt) {
-		Gender oldGender = (Gender) evt.getOldValue();
-		Gender newGender = (Gender) evt.getNewValue();
-		for (int row = 0; row < tableModel.getRowCount(); ++row) {
-			if (oldGender.equals(newGender)) {
-				tableModel.setValueAt(newGender, row, 1);
-			}
-		}
-	}
-	
-	private void updateSpecies(PropertyChangeEvent evt) {
-		Species oldSpecies = (Species) evt.getOldValue();
-		Species newSpecies = (Species) evt.getNewValue();
-		for (int row = 0; row < tableModel.getRowCount(); ++row) {
-			if (oldSpecies.equals(newSpecies)) {
-				tableModel.setValueAt(newSpecies, row, 1);
-			}
 		}
 	}
 
@@ -114,53 +73,52 @@ public class PersonTable extends AbstractTable {
 		if (row == -1) {
 			return;
 		}
-		Person person = (Person) getEntityFromRow(row);
-//		ctrl.setPersonToEdit(person);
+		Species species = (Species) getEntityFromRow(row);
+//		ctrl.setGenderToEdit(species);
 //		mainFrame.showView(ViewName.EDITOR);
-		mainFrame.showEditorAsDialog(person);
+		mainFrame.showEditorAsDialog(species);
 	}
 
 	@Override
 	protected void sendSetNewEntityToEdit(AbstractEntity entity) {
-//		ctrl.setPersonToEdit((Person) entity);
+//		ctrl.setGenderToEdit((Species) entity);
 //		mainFrame.showView(ViewName.EDITOR);
 		mainFrame.showEditorAsDialog(entity);
 	}
 
 	@Override
 	protected synchronized void sendDeleteEntity(int row) {
-		Person person = (Person) getEntityFromRow(row);
-		ctrl.deletePerson(person);
+		Species species = (Species) getEntityFromRow(row);
+		ctrl.deleteSpecies(species);
 	}
 
 	@Override
 	protected synchronized void sendDeleteEntities(int[] rows) {
 		ArrayList<Long> ids = new ArrayList<>();
 		for (int row : rows) {
-			Person person = (Person) getEntityFromRow(row);
-			ids.add(person.getId());
+			Species species = (Species) getEntityFromRow(row);
+			ids.add(species.getId());
 		}
-		ctrl.deleteMultiPersons(ids);
+		ctrl.deleteMultiSpecies(ids);
 	}
 
 	@Override
 	protected AbstractEntity getEntity(Long id) {
 		BookModel model = mainFrame.getBookModel();
 		Session session = model.beginTransaction();
-		PersonDAOImpl dao = new PersonDAOImpl(session);
-		Person person = dao.find(id);
+		SpeciesDAOImpl dao = new SpeciesDAOImpl(session);
+		Species species = dao.find(id);
 		model.commit();
-		return person;
+		return species;
 	}
 
 	@Override
 	protected AbstractEntity getNewEntity() {
-		return new Person();
+		return new Species();
 	}
-	
+
 	@Override
 	public String getTableName() {
-		return("Persons");
+		return("Species");
 	}
-	
 }

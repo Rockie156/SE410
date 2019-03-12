@@ -64,6 +64,7 @@ import storybook.model.hbn.entity.AbstractEntity;
 import storybook.model.hbn.entity.Category;
 import storybook.model.hbn.entity.Chapter;
 import storybook.model.hbn.entity.Gender;
+import storybook.model.hbn.entity.Species;
 import storybook.model.hbn.entity.Internal;
 import storybook.model.hbn.entity.Part;
 import storybook.model.hbn.entity.Person;
@@ -479,6 +480,7 @@ public abstract class AbstractTable extends AbstractPanel implements ActionListe
 						|| ret instanceof Chapter
 						|| ret instanceof Part
 						|| ret instanceof Gender
+						|| ret instanceof Species
 						|| ret instanceof Category
 						|| ret instanceof Person
 						|| ret instanceof Icon) {

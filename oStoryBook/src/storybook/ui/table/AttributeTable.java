@@ -58,7 +58,7 @@ public class AttributeTable extends AbstractTable {
 			Attribute entity = (Attribute) getEntityFromRow(row);
 			ids.add(entity.getId());
 		}
-		ctrl.deleteMultiGenders(ids);
+		ctrl.deleteMultiGenders(ids); //not sure how to add species functionality or if necessary -Andrew
 	}
 
 	@Override

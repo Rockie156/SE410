@@ -43,6 +43,7 @@ import storybook.model.EntityUtil;
 import storybook.model.hbn.entity.Category;
 import storybook.model.hbn.entity.Chapter;
 import storybook.model.hbn.entity.Gender;
+import storybook.model.hbn.entity.Species;
 import storybook.model.hbn.entity.Idea;
 import storybook.model.hbn.entity.Internal;
 import storybook.model.hbn.entity.Item;
@@ -90,6 +91,7 @@ public class SbMenu {
     private JButton btMemo;
     private JButton btNewChapter;
     private JButton btNewGender;
+    private JButton btNewSpecies;
     private JButton btNewItem;
     private JButton btNewItemlink;
     private JButton btNewLocation;
@@ -104,6 +106,7 @@ public class SbMenu {
     public JButton btPreviousPart;
     private JButton btTabChapter;
     private JButton btTabGender;
+    private JButton btTabSpecies;
     private JButton btTabIdea;
     private JButton btTabItem;
     private JButton btTabItemLink;
@@ -181,6 +184,7 @@ public class SbMenu {
     private JMenuItem newChapters;
     private JMenuItem newFOI;
     private JMenuItem newGender;
+    private JMenuItem newSpecies;
     private JMenuItem newIdea;
     private JMenuItem newItem;
     private JMenuItem newItemLink;
@@ -203,6 +207,7 @@ public class SbMenu {
     private JMenuItem tabCategory;
     private JMenuItem tabChapter;
     private JMenuItem tabGender;
+    private JMenuItem tabSpecies;
     private JMenuItem tabIdea;
     private JMenuItem tabItem;
     private JMenuItem tabItemLink;
@@ -310,19 +315,19 @@ public class SbMenu {
 		JButton[] btn = {
 			btFileNew, btFileOpen, btFileSave, //3
 			btNewStrand, btNewPart, btNewChapter, btNewScene,//4
-			btNewPerson, btNewGender, btNewRelationship,//3
+			btNewPerson, btNewGender, btNewSpecies, btNewRelationship,//4, was 3
 			btNewLocation,//1
 			btNewItem, btNewItemlink,//2
 			btNewTag, btNewTaglink, //2
 			btMemo, btIdea, //2
 			btTabStrand, btTabPart, btTabChapter, btTabScene,//4
-			btTabPerson, btTabGender, btTabRelationship, //3
+			btTabPerson, btTabGender, btTabSpecies, btTabRelationship, //4, was 3
 			btTabLocation, //1
 			btTabItem, btTabItemLink,//2
 			btTabTag, btTabTagLink, //2
 			btTabMemo, btTabIdea,//2
 			btViewChrono, btViewBook, btViewReading, btViewManage, btViewMemoria, btViewStoryboard, btViewTypist //6
-		}; // total 37
+		}; // total 39, was 37
 		//récupération du paramétrage sous forme d'un
 		String param = mainFrame.getPref().get(SbPref.Key.TOOLBAR.toString(), SbPref.Default.TOOLBAR.toString());
 		while (param.length() < btn.length) {
@@ -399,6 +404,12 @@ public class SbMenu {
 		});
         toolBar.add(btNewGender);
 
+        btNewSpecies = initButton("16x16/species","species.new");
+        btNewSpecies.addActionListener((ActionEvent evt) -> {
+			mainFrame.newEntity(new Species());
+		});
+        toolBar.add(btNewSpecies);
+        
         btNewRelationship = initButton("16x16/group","relationship.new");
         btNewRelationship.addActionListener((ActionEvent evt) -> {
 			mainFrame.newEntity(new Relationship());
@@ -473,6 +484,12 @@ public class SbMenu {
 			mainFrame.showAndFocus(GENDERS);
 		});
         toolBar.add(btTabGender);
+        
+        btTabSpecies = initButton("16x32/manage_species","species");
+        btTabSpecies.addActionListener((ActionEvent evt) -> {
+			mainFrame.showAndFocus(SPECIES);
+		});
+        toolBar.add(btTabSpecies);
 
         btTabRelationship = initButton("16x32/manage_relationships","relationship");
         btTabRelationship.addActionListener((ActionEvent evt) -> {
@@ -823,6 +840,12 @@ public class SbMenu {
 			mainFrame.newEntity(new Gender());
 		});
         menuNewEntity.add(newGender);
+        
+        newSpecies = initMenuItem("16x16/species","",' ',"species","newSpecies");
+        newSpecies.addActionListener((ActionEvent evt) -> {
+			mainFrame.newEntity(new Species());
+		});
+        menuNewEntity.add(newSpecies);
 
         newCategory = initMenuItem("16x16/category","",' ',"persons.category","newCategory");
         newCategory.addActionListener((ActionEvent evt) -> {
@@ -947,6 +970,12 @@ public class SbMenu {
 			mainFrame.showAndFocus(GENDERS);
 		});
         menuSecondaryObjects.add(tabGender);
+        
+        tabSpecies = initMenuItem("16x32/manage_species","ctrl alt G",'G',"species","tabSpecies");
+        tabSpecies.addActionListener((ActionEvent evt) -> {
+			mainFrame.showAndFocus(SPECIES);
+		});
+        menuSecondaryObjects.add(tabSpecies);
 
         tabCategory = initMenuItem("16x32/manage_categories","",' ',"persons.category","tabCategory");
         tabCategory.addActionListener((ActionEvent evt) -> {

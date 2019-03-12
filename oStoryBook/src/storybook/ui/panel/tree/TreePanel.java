@@ -332,6 +332,9 @@ public class TreePanel extends AbstractPanel implements TreeSelectionListener, M
 			personsByGendersNode = new EntityNode("tree.persons.by.gender", new Gender());
 			topNode.add(personsByGendersNode);
 			refreshPersonsByGender();
+			personsBySpeciesNode = new EntityNode("tree.persons.by.species", new Species());
+			topNode.add(personsBySpeciesNode);
+			refreshPersonsBySpecies();
 		}
 		if (btToogleLocations.isSelected()) {
 			locationsNode = new EntityNode("locations", new Location());
@@ -507,6 +510,23 @@ public class TreePanel extends AbstractPanel implements TreeSelectionListener, M
 			for (Person person : persons) {
 				DefaultMutableTreeNode personNode = new DefaultMutableTreeNode(person);
 				genderNode.add(personNode);
+			}
+		}
+		model.commit();
+	}
+	
+	private void refreshPersonsBySpecies() {
+		BookModel model = mainFrame.getBookModel();
+		Session session = model.beginTransaction();
+		SpeciesDAOImpl speciesDao = new SpeciesDAOImpl(session);
+		List<Species> species = speciesDao.findAll();
+		for (Species s : species) {
+			DefaultMutableTreeNode speciesNode = new DefaultMutableTreeNode(s);
+			personsByGendersNode.add(speciesNode);
+			List<Person> persons = speciesDao.findPersons(s);
+			for (Person person : persons) {
+				DefaultMutableTreeNode personNode = new DefaultMutableTreeNode(person);
+				speciesNode.add(personNode);
 			}
 		}
 		model.commit();
