@@ -1,0 +1,148 @@
+WARNING - 12:04:40: Creating types 
+WARNING - 12:04:46: Initializing types
+ERROR - 12:05:37: org.apache.commons.beanutils.ContextClassLoaderLocal cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:05:40: org.apache.commons.beanutils.ContextClassLoaderLocal cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - The operation was not stored in the content of an Enumeration : IOCase
+ERROR - The operation was not stored in the content of an Enumeration : IOCase
+ERROR - The operation was not stored in the content of an Enumeration : IOCase
+ERROR - The operation was not stored in the content of an Enumeration : IOCase
+ERROR - The operation was not stored in the content of an Enumeration : IOCase
+ERROR - The operation was not stored in the content of an Enumeration : IOCase
+ERROR - The operation was not stored in the content of an Enumeration : IOCase
+ERROR - The operation was not stored in the content of an Enumeration : IOCase
+ERROR - The operation was not stored in the content of an Enumeration : IOCase
+ERROR - The operation was not stored in the content of an Enumeration : IOCase
+ERROR - The operation was not stored in the content of an Enumeration : IOCase
+ERROR - The operation was not stored in the content of an Enumeration : IOCase
+ERROR - The operation was not stored in the content of an Enumeration : JavaVersion
+ERROR - The operation was not stored in the content of an Enumeration : JavaVersion
+ERROR - The operation was not stored in the content of an Enumeration : JavaVersion
+ERROR - The operation was not stored in the content of an Enumeration : JavaVersion
+ERROR - The operation was not stored in the content of an Enumeration : JavaVersion
+ERROR - The operation was not stored in the content of an Enumeration : JavaVersion
+ERROR - The operation was not stored in the content of an Enumeration : JavaVersion
+ERROR - 12:05:53: org.apache.commons.text.StrLookup cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:05:53: org.apache.commons.text.StrLookup cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:05:54: org.apache.commons.text.StrLookup cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:06:12: org.apache.commons.text.diff.ReplacementsHandler cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:06:16: org.apache.commons.text.similarity.Tokenizer cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:06:16: org.apache.commons.text.similarity.EditDistance cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:06:16: org.apache.commons.text.similarity.SimilarityScore cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - The operation was not stored in the content of an Enumeration : State
+ERROR - The operation was not stored in the content of an Enumeration : State
+ERROR - The operation was not stored in the content of an Enumeration : State
+ERROR - 12:06:26: org.apache.commons.text.time.FormatCache cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:07:09: org.jdesktop.swingx.rollover.TableRolloverController cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - The operation was not stored in the content of an Enumeration : TextAlignment
+ERROR - The operation was not stored in the content of an Enumeration : TextAlignment
+ERROR - 12:07:43: org.jdesktop.swingx.multislider.MultiThumbModel cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:07:44: org.jdesktop.swingx.JXMultiThumbSlider cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - The operation was not stored in the content of an Enumeration : ScrollableSizeHint
+ERROR - The operation was not stored in the content of an Enumeration : ScrollableSizeHint
+ERROR - The operation was not stored in the content of an Enumeration : ScrollableSizeHint
+ERROR - The operation was not stored in the content of an Enumeration : ScrollableSizeHint
+ERROR - The operation was not stored in the content of an Enumeration : ScrollableSizeHint
+ERROR - The operation was not stored in the content of an Enumeration : ScrollableSizeHint
+ERROR - The operation was not stored in the content of an Enumeration : ScrollableSizeHint
+ERROR - 12:07:45: org.jdesktop.swingx.rollover.ListRolloverController cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:07:55: org.jdesktop.swingx.JXMultiThumbSlider cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:07:56: org.jdesktop.swingx.rollover.TreeRolloverController cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - The operation was not stored in the content of an Enumeration : Direction
+ERROR - The operation was not stored in the content of an Enumeration : Direction
+ERROR - 12:08:17: org.jdesktop.swingx.multislider.Thumb cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:08:17: org.jdesktop.swingx.multislider.MultiThumbModel cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:08:18: org.jdesktop.swingx.painter.Painter cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:08:18: PainterPaintContext cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:08:18: org.jdesktop.swingx.painter.Painter cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - The operation was not stored in the content of an Enumeration : Interpolation
+ERROR - The operation was not stored in the content of an Enumeration : Interpolation
+ERROR - 12:08:26: org.jdesktop.swingx.painter.Painter cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:08:43: org.jdesktop.swingx.JXMultiThumbSlider cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:08:43: org.jdesktop.swingx.JXMultiThumbSlider cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:08:44: org.jdesktop.swingx.plaf.basic.TextCrossingPainter cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:09:18: org.jdesktop.swingx.renderer.ComponentProvider cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:09:19: org.jdesktop.swingx.renderer.ComponentProvider cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:09:19: org.jdesktop.swingx.renderer.DefaultVisuals cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - 12:09:20: org.jdesktop.swingx.hyperlink.AbstractHyperlinkAction cannot be found by org.eclipse.umlgen.reverse.java_8.0.0.201709181143
+ERROR - The operation was not stored in the content of an Enumeration : Key
+ERROR - The operation was not stored in the content of an Enumeration : Key
+ERROR - The operation was not stored in the content of an Enumeration : Default
+ERROR - The operation was not stored in the content of an Enumeration : Default
+ERROR - The operation was not stored in the content of an Enumeration : CommonProps
+ERROR - The operation was not stored in the content of an Enumeration : CommonProps
+ERROR - The operation was not stored in the content of an Enumeration : CommonProps
+ERROR - The operation was not stored in the content of an Enumeration : ChronoViewProps
+ERROR - The operation was not stored in the content of an Enumeration : ChronoViewProps
+ERROR - The operation was not stored in the content of an Enumeration : ChronoViewProps
+ERROR - The operation was not stored in the content of an Enumeration : StoryboardViewProps
+ERROR - The operation was not stored in the content of an Enumeration : StoryboardViewProps
+ERROR - The operation was not stored in the content of an Enumeration : StoryboardViewProps
+ERROR - The operation was not stored in the content of an Enumeration : BookViewProps
+ERROR - The operation was not stored in the content of an Enumeration : BookViewProps
+ERROR - The operation was not stored in the content of an Enumeration : BookViewProps
+ERROR - The operation was not stored in the content of an Enumeration : ReadingViewProps
+ERROR - The operation was not stored in the content of an Enumeration : ReadingViewProps
+ERROR - The operation was not stored in the content of an Enumeration : ReadingViewProps
+ERROR - The operation was not stored in the content of an Enumeration : ManageViewProps
+ERROR - The operation was not stored in the content of an Enumeration : ManageViewProps
+ERROR - The operation was not stored in the content of an Enumeration : ManageViewProps
+ERROR - The operation was not stored in the content of an Enumeration : MemoriaViewProps
+ERROR - The operation was not stored in the content of an Enumeration : MemoriaViewProps
+ERROR - The operation was not stored in the content of an Enumeration : MemoriaViewProps
+ERROR - The operation was not stored in the content of an Enumeration : ChapterProps
+ERROR - The operation was not stored in the content of an Enumeration : ChapterProps
+ERROR - The operation was not stored in the content of an Enumeration : ChapterProps
+ERROR - The operation was not stored in the content of an Enumeration : PartProps
+ERROR - The operation was not stored in the content of an Enumeration : PartProps
+ERROR - The operation was not stored in the content of an Enumeration : PartProps
+ERROR - The operation was not stored in the content of an Enumeration : LocationProps
+ERROR - The operation was not stored in the content of an Enumeration : LocationProps
+ERROR - The operation was not stored in the content of an Enumeration : LocationProps
+ERROR - The operation was not stored in the content of an Enumeration : PersonProps
+ERROR - The operation was not stored in the content of an Enumeration : PersonProps
+ERROR - The operation was not stored in the content of an Enumeration : PersonProps
+ERROR - The operation was not stored in the content of an Enumeration : RelationshipProps
+ERROR - The operation was not stored in the content of an Enumeration : RelationshipProps
+ERROR - The operation was not stored in the content of an Enumeration : RelationshipProps
+ERROR - The operation was not stored in the content of an Enumeration : AttributeProps
+ERROR - The operation was not stored in the content of an Enumeration : AttributeProps
+ERROR - The operation was not stored in the content of an Enumeration : AttributeProps
+ERROR - The operation was not stored in the content of an Enumeration : AttributeListProps
+ERROR - The operation was not stored in the content of an Enumeration : AttributeListProps
+ERROR - The operation was not stored in the content of an Enumeration : AttributeListProps
+ERROR - The operation was not stored in the content of an Enumeration : GenderProps
+ERROR - The operation was not stored in the content of an Enumeration : GenderProps
+ERROR - The operation was not stored in the content of an Enumeration : GenderProps
+ERROR - The operation was not stored in the content of an Enumeration : CategoryProps
+ERROR - The operation was not stored in the content of an Enumeration : CategoryProps
+ERROR - The operation was not stored in the content of an Enumeration : CategoryProps
+ERROR - The operation was not stored in the content of an Enumeration : StrandProps
+ERROR - The operation was not stored in the content of an Enumeration : StrandProps
+ERROR - The operation was not stored in the content of an Enumeration : StrandProps
+ERROR - The operation was not stored in the content of an Enumeration : IdeaProps
+ERROR - The operation was not stored in the content of an Enumeration : IdeaProps
+ERROR - The operation was not stored in the content of an Enumeration : IdeaProps
+ERROR - The operation was not stored in the content of an Enumeration : TagProps
+ERROR - The operation was not stored in the content of an Enumeration : TagProps
+ERROR - The operation was not stored in the content of an Enumeration : TagProps
+ERROR - The operation was not stored in the content of an Enumeration : MemoProps
+ERROR - The operation was not stored in the content of an Enumeration : MemoProps
+ERROR - The operation was not stored in the content of an Enumeration : MemoProps
+ERROR - The operation was not stored in the content of an Enumeration : ItemProps
+ERROR - The operation was not stored in the content of an Enumeration : ItemProps
+ERROR - The operation was not stored in the content of an Enumeration : ItemProps
+ERROR - The operation was not stored in the content of an Enumeration : TagLinkProps
+ERROR - The operation was not stored in the content of an Enumeration : TagLinkProps
+ERROR - The operation was not stored in the content of an Enumeration : TagLinkProps
+ERROR - The operation was not stored in the content of an Enumeration : ItemLinkProps
+ERROR - The operation was not stored in the content of an Enumeration : ItemLinkProps
+ERROR - The operation was not stored in the content of an Enumeration : ItemLinkProps
+ERROR - The operation was not stored in the content of an Enumeration : SceneProps
+ERROR - The operation was not stored in the content of an Enumeration : SceneProps
+ERROR - The operation was not stored in the content of an Enumeration : SceneProps
+ERROR - The operation was not stored in the content of an Enumeration : InternalProps
+ERROR - The operation was not stored in the content of an Enumeration : InternalProps
+ERROR - The operation was not stored in the content of an Enumeration : InternalProps
+ERROR - The operation was not stored in the content of an Enumeration : TimeEventProps
+ERROR - The operation was not stored in the content of an Enumeration : TimeEventProps
+ERROR - The operation was not stored in the content of an Enumeration : TimeEventProps

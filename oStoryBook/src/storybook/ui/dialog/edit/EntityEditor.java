@@ -163,7 +163,7 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 	public AbstractEntity entityLast;
 
 	private enum MsgState {
-		ERRORS, WARNINGS, UPDATED, ADDED
+		ERRORS, WARNINGS, UPDATED, ADDED, DUPLICATE
 	}
 	private AbstractEntityHandler entityHandler;
 	private final BookController ctrl;
@@ -620,6 +620,10 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 		String text = "";
 		Icon icon = null;
 		switch (state) {
+			case DUPLICATE:
+				text = "Duplication Error";
+				icon = IconUtil.StateIcon.ERROR.getIcon();
+				break;
 			case ERRORS:
 				text = I18N.getMsg("error");
 				icon = IconUtil.StateIcon.ERROR.getIcon();
@@ -1236,7 +1240,9 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 				// Check for duplicates and flag error state if true
 				for (Location l : locations) {
 					if (l.equals(entity_as_location)) {
-						errorState = ErrorState.ERROR;
+						errorState = ErrorState.DUPLICATION;
+						// This statement gets the error message to appear when hitting ok.
+						setMsgState(MsgState.DUPLICATE);
 						break;
 					}
 				}
@@ -1244,7 +1250,13 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 			if (errorState != ErrorState.OK) {
 				if (errorState == ErrorState.ERROR) {
 					setMsgState(MsgState.ERRORS);
-				} else {
+				}
+				else if (errorState == ErrorState.DUPLICATION) {
+					System.out.println("Entered.");
+					setMsgState(MsgState.DUPLICATE);
+				}
+				
+				else {
 					setMsgState(MsgState.WARNINGS);
 				}
 			}
@@ -1270,7 +1282,7 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 			updateEntityFromInputComponents();
 			if (entity.isTransient()) {
 				verifyInput();
-				if (errorState == ErrorState.ERROR) {
+				if (errorState == ErrorState.ERROR || errorState == ErrorState.DUPLICATION) {
 					return;
 				}
 				ctrl.newEntity(entity);
@@ -1281,7 +1293,7 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 				btAddOrUpdate.setText(I18N.getMsg("editor.update"));
 			} else {
 				verifyInput();
-				if (errorState == ErrorState.ERROR) {
+				if (errorState == ErrorState.ERROR || errorState == ErrorState.DUPLICATION) {
 					return;
 				}
 				ctrl.updateEntity(entity);
@@ -1378,7 +1390,7 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 			NetUtil.openBrowser(baseUrl);
 		} else if (ComponentName.BT_OK.check(compName)) {
 			addOrUpdateEntity();
-			if (errorState == ErrorState.ERROR) {
+			if (errorState == ErrorState.ERROR || errorState == ErrorState.DUPLICATION) {
 				return;
 			}
 			unloadEntity();
@@ -1388,7 +1400,7 @@ public class EntityEditor extends AbstractPanel implements ActionListener, ItemL
 			}
 		} else if (ComponentName.BT_ADD_OR_UPDATE.check(compName)) {
 			addOrUpdateEntity();
-			if (errorState == ErrorState.ERROR) {
+			if (errorState == ErrorState.ERROR || errorState == ErrorState.DUPLICATION) {
 			}
 		} else if (ComponentName.BT_CANCEL.check(compName)) {
 			abandonEntityChanges();

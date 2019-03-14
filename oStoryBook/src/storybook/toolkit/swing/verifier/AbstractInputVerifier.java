@@ -25,7 +25,7 @@ import javax.swing.text.JTextComponent;
 public abstract class AbstractInputVerifier extends InputVerifier {
 
 	public enum ErrorState {
-		OK, WARNING, ERROR
+		OK, WARNING, ERROR, DUPLICATION
 	}
 
 	private String errorText;
