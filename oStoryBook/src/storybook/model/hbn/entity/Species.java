@@ -104,25 +104,15 @@ public class Species extends AbstractEntity {
 		this.retirement = retirement;
 	}
 	
-	/*
-	public boolean isMale() {
-		return id == 1;
-	}
-
-	public boolean isFemale() {
-		return id == 2;
-	}*/
-	//////////////////////////////
+	
 	public boolean isHuman() {
 		return id == 1;
 	}
 
 	@Override
 	public Icon getImageIcon() {
-		if (isMale()) {
+		if (isHuman()) {
 			return I18N.getIcon("icon.small.man");
-		} else if (isFemale()) {
-			return I18N.getIcon("icon.small.woman");
 		} else if (getIcone()!=null) {
 			return new ImageIcon(getIcone());
 		}
@@ -130,10 +120,8 @@ public class Species extends AbstractEntity {
 	}
 	
 	public Icon getIcon(int h,int l) {
-		if (isMale()) {
+		if (isHuman()) {
 			return I18N.getIcon("icon.small.man");
-		} else if (isFemale()) {
-			return I18N.getIcon("icon.small.woman");
 		} else if (getIcone()!=null) {
 			return (I18N.resizeIcon(new ImageIcon(getIcone()),new Dimension(h,l)));
 		}
