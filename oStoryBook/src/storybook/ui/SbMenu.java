@@ -276,6 +276,9 @@ public class SbMenu {
 		initTbNew();
         toolBar.add(new JToolBar.Separator());
 		initTbTab();
+		toolBar.add(new JToolBar.Separator());
+		initTbTab();//adding a nother tab and seperator for species
+		//not sure if this is necessary...? -andrew
         toolBar.add(new JToolBar.Separator());
 		initTbView();
         toolBar.add(new JToolBar.Separator());
